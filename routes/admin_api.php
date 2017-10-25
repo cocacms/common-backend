@@ -223,7 +223,7 @@ Route::middleware(['auth:apiAdmin','permission'])->group(function (){
         Route::patch('/{id}', 'GoodController@update')
             ->name('good@update')
             ->permissionName('编辑商品');
-    },'管理员');
+    },'商品管理');
 
 
     /**
