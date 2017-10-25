@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Good extends Model
 {
-    //
+    use SoftDeletes;
+
+    protected $fillable = ['name','creator','pic','origin_amount'];
 
 
     public function getMy($uid)
@@ -23,6 +26,20 @@ class Good extends Model
         $good->origin_amount = $price;
         $good->save();
         return $good;
+    }
+
+    public function updateGood($id,$data)
+    {
+        $good = Good::query()->findOrFail($id);
+        $good->fill($data);
+        $good->save();
+        return $good;
+    }
+
+    public function removeGood($ids)
+    {
+        $count = Good::query()->whereIn('id',$ids)->delete();
+        return $count;
     }
 
     public function search($key)

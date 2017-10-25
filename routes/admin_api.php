@@ -203,6 +203,29 @@ Route::middleware(['auth:apiAdmin','permission'])->group(function (){
 
     },'文章标签');
 
+
+
+    /**
+     * 商品
+     */
+    Route::prefix('good')->group(function (){
+        Route::get('/', 'GoodController@lists')
+            ->name('good@lists')
+            ->permissionName('获取商品列表')
+            ->bindMenu('/good');
+
+        Route::post('/', 'GoodController@create')
+            ->name('good@create')
+            ->permissionName('创建商品');
+        Route::delete('/', 'GoodController@delete')
+            ->name('good@delete')
+            ->permissionName('删除商品');
+        Route::patch('/{id}', 'GoodController@update')
+            ->name('good@update')
+            ->permissionName('编辑商品');
+    },'管理员');
+
+
     /**
      * 上传
      */
