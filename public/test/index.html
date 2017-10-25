@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+  <title>特步 #颖火虫点亮计划#</title>
+  <script src="//g.alicdn.com/tmapp/tida/3.2.76/tida.js?appkey=23337455"></script>
+
+  <script>
+
+    window.PromiseRejectionEvent = function () {};
+    if (!window.Intl) {
+      document.writeln('<script src="https://as.alipayobjects.com/g/component/intl/1.0.1/??Intl.js,locale-data/jsonp/en.js,locale-data/jsonp/zh.js">' + '<' + '/script>');
+    }
+  </script>
+<link href="./index.fab578bf.css" rel="stylesheet"></head>
+<body>
+
+  <div id="loading-box" style="
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 99999999;
+      background-color: #131555;
+      background-image: url(./loading_bg.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    ">
+    <img src="./loading.gif" style="width:1.75rem;height:1.75rem"/>
+    <img src="./loading_tips.png" style="width:0.5rem;height:0.3rem"/>
+  </div>
+
+  <div id="root" class="bg"></div>
+  <script type="text/javascript" src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
+  
+  <script type="text/javascript">
+  if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+      FastClick.attach(document.body);
+    }, false);
+  }
+
+  window.testDay = 1507219200000;
+
+  window.onload = function(){
+
+    //如果localStorage.mixNick存在，直接进入
+    if(localStorage.mixNick){
+      console.log('start ...')
+      window.initPage(); //渲染主活动
+    } else {
+      Tida.ready({
+          // interactId:"", // 互动实列ID type string 若无抽奖模块，此参数无须传入。给错误的实例ID会走错误流程
+          // module: [] // 应用所需要的模块。非必选，默认加载所有模块。支持的模块见注释。
+          // sellerNick:"" // 商家名称
+          // shopId:123 // 店铺ID 从url中取 可选
+      }, function(){
+        Tida.doAuth(function(data){
+          if(data.finish){
+            var options = {
+                sellerNick: "xstep"
+            };
+            Tida.mixNick(options, function (data) {
+                if(data.success == 'true'){
+                  localStorage.mixNick = data.mixnick;
+                  window.initPage(); //渲染主活动
+                }else{
+                  alert("获取mixnick失败，请刷新重试！");
+                }
+            });
+            // 授权成功 可以顺利调用需要授权的接口了
+          }else {
+              // 未能成功授权
+              alert("未能成功授权，请刷新重试！");
+          }
+        });
+      })
+    }
+  }
+  
+
+
+  </script>
+<script type="text/javascript" src="./index.183f7bce.js"></script></body>
+</html>
