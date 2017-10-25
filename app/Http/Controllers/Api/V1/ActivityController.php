@@ -49,7 +49,13 @@ class ActivityController extends Controller
         $activity->isActive = (strtotime($activity->start_time) <= time() && time() <= strtotime($activity->end_time));
         $activity->start_time = strtotime($activity->start_time) * 1000;
         $activity->end_time = strtotime($activity->end_time) * 1000;
-        foreach ($activity->goodsPK as &$good){
+
+        $activity->goods = array_values( $activity->goodsPK->filter(function ($good, $key) use ($activity) {
+
+            if(is_null($good->goods)){
+                return false;
+            }
+
             $key = 'sell:'.$activity->id.':'.$good->id;
             $count = Redis::get($key);
 
@@ -57,7 +63,10 @@ class ActivityController extends Controller
                 $count = 0;
             }
             $good->sell_count = $count;
-        }
+
+            return true;
+        })->toArray() );
+
         return new SuccessResponse($activity);
 
 

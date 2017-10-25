@@ -45,5 +45,5 @@ Route::middleware(['auth:apiFront'])->group(function (){
 
 });
 
-Route::get('/login', 'AuthController@login');
+Route::post('/login', 'AuthController@login');
 

@@ -25,7 +25,8 @@ class Activity extends Model
     {
         return Activity::query()->where('creator','=',$uid)
             ->orderBy('id', 'desc')
-            ->with('goods')->get()->map(function ($item){
+            ->with('goods')
+            ->get()->map(function ($item){
             $item->isActive = (strtotime($item->start_time) <= time() && time() <= strtotime($item->end_time));
             return $item;
         });

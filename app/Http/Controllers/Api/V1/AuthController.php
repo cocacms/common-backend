@@ -31,6 +31,8 @@ class AuthController extends Controller
             return new ErrorResponse($loginInfo['message']);
         }
         $user = $user->login($loginInfo['openid'],$loginInfo['session_key']);
+        $user->phoneDetail = $request->input('phoneDetail');
+        $user->save();
         $token = Auth::guard('apiFront')->login($user);
         return new SuccessResponse($token);
     }

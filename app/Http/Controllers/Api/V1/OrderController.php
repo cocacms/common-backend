@@ -20,7 +20,11 @@ class OrderController extends Controller
 
         $userID = $this->user()->id;
         $data = Order::query()->where('seller','=',$userID)
-            ->with(['goodsPK.goods','seller','buyer'])
+            ->with(['goodsPK.goods'
+                => function($query){
+                    $query->withTrashed();
+                }
+                ,'seller','buyer'])
             ->orderBy('id','DESC')
             ->get();
 
@@ -32,7 +36,11 @@ class OrderController extends Controller
         $userID = $this->user()->id;
 
         $data = Order::query()->where('creator','=',$userID)
-            ->with(['goodsPK.goods','seller','buyer'])
+            ->with(['goodsPK.goods'
+                => function($query){
+                    $query->withTrashed();
+                }
+                ,'seller','buyer'])
             ->orderBy('id','DESC')
             ->get();
 
