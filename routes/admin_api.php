@@ -225,6 +225,17 @@ Route::middleware(['auth:apiAdmin','permission'])->group(function (){
             ->permissionName('编辑商品');
     },'商品管理');
 
+    /**
+     * 订单
+     */
+    Route::prefix('order')->group(function (){
+        Route::get('/', 'OrderController@lists')
+            ->name('order@lists')
+            ->permissionName('获取订单列表')
+            ->bindMenu('/order');
+
+    },'订单管理');
+
 
     /**
      * 上传
