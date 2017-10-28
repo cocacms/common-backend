@@ -78,7 +78,7 @@ class SendWxTmp implements ShouldQueue
                         "value"=> $this->price,
                     ],
                 ],
-                'emphasis_keyword'=>'keyword1.DATA'
+                'emphasis_keyword'=>'keyword4.DATA'
             ]),
         ));
 
