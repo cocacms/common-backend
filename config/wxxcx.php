@@ -4,11 +4,11 @@ return [
     /**
      * 小程序APPID
      */
-    'appid' => 'wx22b167f872d0e478',
+    'appid' => env('WX_APPID'),
     /**
      * 小程序Secret
      */
-    'secret' => 'f3177db7ed1bb17c641c5049c86d484b',
+    'secret' => env('WX_SECRET'),
     /**
      * 小程序登录凭证 code 获取 session_key 和 openid 地址，不需要改动
      */

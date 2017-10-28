@@ -36,7 +36,7 @@ class User extends Model implements Authenticatable
         $xcx = App::make("wxxcx");
         $xcx->setSessionKey($user->sessionkey);
         $userinfo = $xcx->getUserInfo($encryptedData,$iv);
-        Log::info('user info update '.json_encode($userinfo));
+//        Log::info('user info update '.json_encode($userinfo));
         if(!isset($userinfo['nickName'])){
             throw new AuthenticationException();
         }

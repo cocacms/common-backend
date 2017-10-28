@@ -32,6 +32,7 @@ Route::middleware(['auth:apiFront'])->group(function (){
         Route::get('/sell', 'OrderController@sell');
         Route::get('/buy', 'OrderController@buy');
         Route::get('/check/{tid}', 'OrderController@check');
+        Route::post('/address/{oid}', 'OrderController@editAddress');
     });
 
     Route::prefix('good')->group(function (){

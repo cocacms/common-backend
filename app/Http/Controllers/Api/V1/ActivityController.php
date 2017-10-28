@@ -72,11 +72,12 @@ class ActivityController extends Controller
 
     }
 
-    public function handle(Request $request,Order $order)
+    public function handle(Request $request)
     {
         $userId = $this->user()->id;
         $ids = $request->input('ids');
         $aid = $request->input('aid');
+        $fid = $request->input('fid');
 
         $activity = Activity::query()->findOrFail($aid);
         if(!(strtotime($activity->start_time) <= time() && time() <= strtotime($activity->end_time))){
@@ -99,6 +100,8 @@ class ActivityController extends Controller
         //创建任务
         $task = new Task();
         $uuid = Uuid::uuid4();
+        $task->oid = 0;
+        $task->form_id = $fid;
         $task->tid = $uuid->getTimeLowHex();
         $task->save();
 

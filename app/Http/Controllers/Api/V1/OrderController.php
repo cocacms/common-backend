@@ -49,6 +49,22 @@ class OrderController extends Controller
 
     public function check($tid)
     {
-        return new SuccessResponse(Task::query()->where('tid','=',$tid)->firstOrFail());
+        return new SuccessResponse(
+            Task::query()
+                ->where('tid','=',$tid)
+                ->with('order')
+                ->firstOrFail()
+        );
+    }
+
+
+    public function editAddress(Request $request,$oid)
+    {
+
+        $order = Order::query()->findOrFail($oid);
+        $order->fill($request->all());
+        $order->save();
+
+        return new SuccessResponse();
     }
 }

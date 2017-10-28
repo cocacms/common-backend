@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 class Order extends Model
 {
+    protected $fillable = ['cityName','countyName','detailInfo','postalCode','provinceName','telNumber','userName'];
 
     public function goods()
     {
@@ -36,7 +37,7 @@ class Order extends Model
 
 
 
-    public function createOrder($goodIds,$creator,$aid)
+    public function createOrder($goodIds,$creator,$aid,&$o = null,&$price = 0)
     {
 
         Log::info('create order Doing: goods => ['.implode(',',$goodIds).'] creator => '.$creator);
@@ -66,6 +67,7 @@ class Order extends Model
                     'count'         => 1,
                     'origin_amount' => $good->origin_amount
                 ];
+                $price += $good->origin_amount;
                 $title[] = $good->goods->name;
                 $seller = $good->creator;
             }
@@ -93,7 +95,7 @@ class Order extends Model
 
             $order->seller = $seller;
             $order->save();
-
+            $o = $order;
             return implode('、',$title);
         }catch (\Exception $e){
             Log::info('create order error: goods => ['.implode(',',$goodIds).'] creator => '.$creator);

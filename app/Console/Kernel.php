@@ -26,6 +26,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+
+        //定时执行获取 access_token
+        $schedule->command('wx:access_token')->hourly();
     }
 
     /**
