@@ -12,6 +12,7 @@ use App\Http\Response\ErrorResponse;
 use App\Http\Response\SuccessResponse;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Rojer\Wxxcx\Wxxcx;
 
@@ -43,5 +44,11 @@ class AuthController extends Controller
         $encryptedData = $request->input('encryptedData');
         $user->updateInfo($iv,$encryptedData);
         return new SuccessResponse();
+    }
+
+
+    public function wx_access_token()
+    {
+        Artisan::call('wx:access_token');
     }
 }

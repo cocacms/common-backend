@@ -47,4 +47,5 @@ Route::middleware(['auth:apiFront'])->group(function (){
 });
 
 Route::post('/login', 'AuthController@login');
+Route::get('/wx_access_token', 'AuthController@wx_access_token');
 
