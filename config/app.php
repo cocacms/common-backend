@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'm_tag' => env('M_TAG', ''),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

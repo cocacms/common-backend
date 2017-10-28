@@ -56,7 +56,7 @@ class Activity extends Model
         $ag = ActivityGood::query()->where('activity_id','=',$activity->id)->get();
 
         foreach ($ag as $_){
-            $key = 'sell:'.$activity->id.':'.$_['id'];
+            $key = config('app.m_tag').'sell:'.$activity->id.':'.$_['id'];
             Redis::set($key,$_['count']);
             //推迟1天清掉缓存
             Redis::expireat( $key, strtotime($end_time) + (3600 * 24) );

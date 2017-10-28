@@ -53,7 +53,7 @@ class Miao implements ShouldQueue
             }
             $ok = [];
             foreach ($this->ids as $id){
-                $key = 'sell:'.$this->aid.':'.$id;
+                $key = config('app.m_tag').'sell:'.$this->aid.':'.$id;
                 if(Redis::EXISTS($key) == 1){
                     $count = Redis::DECR($key);
                     if($count >= 0){

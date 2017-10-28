@@ -56,7 +56,7 @@ class ActivityController extends Controller
                 return false;
             }
 
-            $key = 'sell:'.$activity->id.':'.$good->id;
+            $key = config('app.m_tag').'sell:'.$activity->id.':'.$good->id;
             $count = Redis::get($key);
 
             if(is_null($count) || $count < 0){
@@ -86,7 +86,7 @@ class ActivityController extends Controller
 
         $ok = [];
         foreach ($ids as $id){
-            $key = 'sell:'.$aid.':'.$id;
+            $key = config('app.m_tag').'sell:'.$aid.':'.$id;
             if(Redis::EXISTS($key) == 1 && intval(Redis::GET($key)) > 0){
                 $ok[] = $id;
             }
