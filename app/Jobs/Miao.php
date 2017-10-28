@@ -75,7 +75,8 @@ class Miao implements ShouldQueue
             $task->finish = true;
             $o = null;
             $price = 0;
-            $task->result = '成功秒到了：'.$order->createOrder($ok,$this->creator,$this->aid,$o,$price);
+            $title = $order->createOrder($ok,$this->creator,$this->aid,$o,$price);
+            $task->result = $title;
             $task->oid = $o->id;
             $task->save();
 
@@ -92,7 +93,7 @@ class Miao implements ShouldQueue
                         $task->form_id,
                         $o->oid,
                         $seller->nickName,
-                        count($ok),
+                        $title,
                         '￥' . $price
                     );
                 }

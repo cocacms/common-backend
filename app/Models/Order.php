@@ -68,7 +68,7 @@ class Order extends Model
                     'origin_amount' => $good->origin_amount
                 ];
                 $price += $good->origin_amount;
-                $title[] = $good->goods->name;
+                $title[] = $good->goods->name.'×1';
                 $seller = $good->creator;
             }
 
