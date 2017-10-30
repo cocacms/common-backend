@@ -62,7 +62,7 @@ class SendWxTmp implements ShouldQueue
             CURLOPT_POSTFIELDS => json_encode([
                 'touser'=>$this->openid,
                 'template_id'=>$TID,
-                'page'=>'/pages/me/index?show=1&oid=' . $this->id ,
+                'page'=>'pages/me/index?show=1&oid=' . $this->id ,
                 'form_id'=>$this->form_id,
                 'data'=>[
                     'keyword1'=>[
