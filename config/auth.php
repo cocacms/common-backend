@@ -50,6 +50,11 @@ return [
             'driver' => 'jwt',
             'provider' => 'users',
         ],
+
+        'apiThreeFront' => [
+            'driver' => 'jwt',
+            'provider' => 'threeUsers',
+        ],
     ],
 
     /*
@@ -78,6 +83,11 @@ return [
         'users' => [
              'driver' => 'eloquent',
              'model' => \App\Models\User::class,
+        ],
+
+        'threeUsers' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\ThreeUser::class,
         ],
     ],
 

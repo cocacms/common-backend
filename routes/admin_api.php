@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::options('{all?}', 'OptionsController@index');
+Route::options('{all?}', 'UploadController@index');
 
 Route::middleware(['auth:apiAdmin','permission'])->group(function (){
 
@@ -140,101 +140,68 @@ Route::middleware(['auth:apiAdmin','permission'])->group(function (){
      * 文章
      */
 
-    Route::prefix('article')->group(function (){
-
-        Route::get('/', 'ArticleController@lists')
-            ->name('article@lists')
-            ->permissionName('获取文章列表')
-            ->bindMenu('/article');
-        Route::post('/', 'ArticleController@create')
-            ->name('article@create')
-            ->permissionName('创建文章');
-        Route::delete('/{id}', 'ArticleController@delete')
-            ->name('article@delete')
-            ->permissionName('删除文章');
-        Route::patch('/{id}', 'ArticleController@update')
-            ->name('article@update')
-            ->permissionName('更新文章');
-
-    },'文章');
+//    Route::prefix('article')->group(function (){
+//
+//        Route::get('/', 'ArticleController@lists')
+//            ->name('article@lists')
+//            ->permissionName('获取文章列表')
+//            ->bindMenu('/article');
+//        Route::post('/', 'ArticleController@create')
+//            ->name('article@create')
+//            ->permissionName('创建文章');
+//        Route::delete('/{id}', 'ArticleController@delete')
+//            ->name('article@delete')
+//            ->permissionName('删除文章');
+//        Route::patch('/{id}', 'ArticleController@update')
+//            ->name('article@update')
+//            ->permissionName('更新文章');
+//
+//    },'文章');
 
     /**
      * 文章分类
      */
 
-    Route::prefix('article-category')->group(function (){
-
-        Route::get('/', 'ArticleCategoryController@lists')
-            ->name('article-category@lists')
-            ->permissionName('获取文章分类列表')
-            ->bindMenu('/article/category');
-        Route::post('/', 'ArticleCategoryController@create')
-            ->name('article-category@create')
-            ->permissionName('创建文章分类');
-        Route::delete('/{id}', 'ArticleCategoryController@delete')
-            ->name('article-category@delete')
-            ->permissionName('删除文章分类');
-        Route::patch('/{id}', 'ArticleCategoryController@update')
-            ->name('article-category@update')
-            ->permissionName('更新文章分类');
-
-    },'文章分类');
+//    Route::prefix('article-category')->group(function (){
+//
+//        Route::get('/', 'ArticleCategoryController@lists')
+//            ->name('article-category@lists')
+//            ->permissionName('获取文章分类列表')
+//            ->bindMenu('/article/category');
+//        Route::post('/', 'ArticleCategoryController@create')
+//            ->name('article-category@create')
+//            ->permissionName('创建文章分类');
+//        Route::delete('/{id}', 'ArticleCategoryController@delete')
+//            ->name('article-category@delete')
+//            ->permissionName('删除文章分类');
+//        Route::patch('/{id}', 'ArticleCategoryController@update')
+//            ->name('article-category@update')
+//            ->permissionName('更新文章分类');
+//
+//    },'文章分类');
 
 
     /**
      * 文章标签
      */
 
-    Route::prefix('article-tag')->group(function (){
-
-        Route::get('/', 'ArticleTagController@lists')
-            ->name('article-tag@lists')
-            ->permissionName('获取文章标签列表')
-            ->bindMenu('/article/tag');
-        Route::post('/', 'ArticleTagController@create')
-            ->name('article-tag@create')
-            ->permissionName('创建文章标签');
-        Route::delete('/{id}', 'ArticleTagController@delete')
-            ->name('article-tag@delete')
-            ->permissionName('删除文章标签');
-        Route::patch('/{id}', 'ArticleTagController@update')
-            ->name('article-tag@update')
-            ->permissionName('更新文章标签');
-
-    },'文章标签');
-
-
-
-    /**
-     * 商品
-     */
-    Route::prefix('good')->group(function (){
-        Route::get('/', 'GoodController@lists')
-            ->name('good@lists')
-            ->permissionName('获取商品列表')
-            ->bindMenu('/good');
-
-        Route::post('/', 'GoodController@create')
-            ->name('good@create')
-            ->permissionName('创建商品');
-        Route::delete('/', 'GoodController@delete')
-            ->name('good@delete')
-            ->permissionName('删除商品');
-        Route::patch('/{id}', 'GoodController@update')
-            ->name('good@update')
-            ->permissionName('编辑商品');
-    },'商品管理');
-
-    /**
-     * 订单
-     */
-    Route::prefix('order')->group(function (){
-        Route::get('/', 'OrderController@lists')
-            ->name('order@lists')
-            ->permissionName('获取订单列表')
-            ->bindMenu('/order');
-
-    },'订单管理');
+//    Route::prefix('article-tag')->group(function (){
+//
+//        Route::get('/', 'ArticleTagController@lists')
+//            ->name('article-tag@lists')
+//            ->permissionName('获取文章标签列表')
+//            ->bindMenu('/article/tag');
+//        Route::post('/', 'ArticleTagController@create')
+//            ->name('article-tag@create')
+//            ->permissionName('创建文章标签');
+//        Route::delete('/{id}', 'ArticleTagController@delete')
+//            ->name('article-tag@delete')
+//            ->permissionName('删除文章标签');
+//        Route::patch('/{id}', 'ArticleTagController@update')
+//            ->name('article-tag@update')
+//            ->permissionName('更新文章标签');
+//
+//    },'文章标签');
 
 
     /**

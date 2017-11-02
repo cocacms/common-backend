@@ -14,16 +14,18 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('openid',30)->unique();
-            $table->string('sessionkey',30)->nullable();
-            $table->string('nickName',30)->nullable();
-            $table->tinyInteger('gender')->default(0);
-            $table->string('city',30)->nullable();
-            $table->string('province',30)->nullable();
-            $table->string('country',30)->nullable();
-            $table->string('avatarUrl')->nullable();
+
+            $table->string('username',18)->unique();
+            $table->string('password');
+            $table->string('remember_token')->nullable();
+            $table->string('avatar')->nullable();
+            $table->integer('sex')->default(0); //性别 0-未知 1-男 2-女
+            $table->string('tel',11)->nullable(); //手机
+            $table->string('mail',60)->nullable(); //邮箱
+            $table->date('birthday')->nullable(); //生日
+            $table->string('nickname',20)->nullable(); //昵称
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -12,40 +12,30 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::options('{all?}', 'OptionsController@index');
+Route::options('{all?}', 'UploadController@index');
 
 Route::middleware(['auth:apiFront'])->group(function (){
-    Route::prefix('user')->group(function (){
-        Route::post('/update', 'AuthController@updateInfo');
+
+    /**
+     * 小程序
+     */
+    Route::prefix('xcx')->namespace('Xcx')->group(function (){
+        Route::prefix('user')->group(function (){
+            Route::post('/update', 'AuthController@updateInfo');
+        });
     });
 
-
-    Route::prefix('activity')->group(function (){
-        Route::get('/', 'ActivityController@my');
-        Route::get('/{id}', 'ActivityController@detail');
-        Route::post('/', 'ActivityController@create');
-
-        Route::put('/', 'ActivityController@handle');
-    });
-
-    Route::prefix('order')->group(function (){
-        Route::get('/sell', 'OrderController@sell');
-        Route::get('/buy', 'OrderController@buy');
-        Route::get('/check/{tid}', 'OrderController@check');
-        Route::post('/address/{oid}', 'OrderController@editAddress');
-    });
-
-    Route::prefix('good')->group(function (){
-        Route::get('/', 'GoodController@my');
-        Route::get('/search', 'GoodController@search');
-        Route::get('/byIds', 'GoodController@byIds');
-        Route::post('/', 'GoodController@create');
-    });
 
     Route::post('/upload', 'UploadController@upload');
 
 });
 
-Route::post('/login', 'AuthController@login');
-Route::get('/wx_access_token', 'AuthController@wx_access_token');
+/**
+ * 小程序
+ */
+Route::prefix('xcx')->namespace('Xcx')->group(function (){
+    Route::post('/login', 'AuthController@login');
+    Route::get('/wx_access_token', 'AuthController@wx_access_token');
+});
+
 

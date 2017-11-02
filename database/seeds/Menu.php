@@ -25,6 +25,7 @@ class Menu extends Seeder
                 'name' => 'backend',
                 'tag'  => 'backend',
                 'show' => false,
+
             ]
         );
 
@@ -33,10 +34,50 @@ class Menu extends Seeder
             [
                 'name' => '控制台',
                 'icon' => 'laptop',
-                'route'=> '/dashboard'
+                'route'=> '/dashboard',
+                'tag'  => 'dashboard'
             ]
         );
 
+
+        $backend->children()->create(
+            [
+                'name' => '网站配置',
+                'icon' => 'setting',
+                'route'=> '/config',
+                'bpid' => $dashboard->id,
+
+            ]
+        );
+
+        $safety = $backend->children()->create(
+            [
+                'name' => '管理与安全',
+                'icon' => 'safety',
+                'bpid' => $dashboard->id,
+
+            ]
+        );
+
+        $safety->children()->create(
+            [
+                'name' => '管理员管理',
+                'icon' => 'solution',
+                'route'=> '/member',
+                'bpid' => $safety->id,
+
+            ]
+        );
+
+        $safety->children()->create(
+            [
+                'name' => '角色与权限',
+                'icon' => 'team',
+                'route'=> '/role',
+                'bpid' => $safety->id,
+
+            ]
+        );
 
         $menu = $backend->children()->create(
             [

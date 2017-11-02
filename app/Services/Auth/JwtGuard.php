@@ -241,11 +241,13 @@ class JwtGuard implements Guard
         if(config('auth.jwt.nbf',0) != 0){
             $payload['nbf'] = time() + config('auth.jwt.nbf',0);
         }
-        $key = config('auth.jwt.privateKey','');
         $sign_type = config('auth.jwt.type','RS256');
         if(stripos($sign_type,'RS') !== false){
+            $key = config('auth.jwt.privateKey','');
             $str        = chunk_split($key, 64, "\n");
             $key = "-----BEGIN RSA PRIVATE KEY-----\n$str-----END RSA PRIVATE KEY-----\n";
+        }else{
+            $key = config('auth.jwt.publicKey','');
         }
 
         return JWT::encode($payload,

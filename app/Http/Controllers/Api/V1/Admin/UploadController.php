@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Storage;
 
 class UploadController extends Controller
 {
+    public function index(){
+        return new SuccessResponse();
+    }
+
     public function upload(Request $request)
     {
 
