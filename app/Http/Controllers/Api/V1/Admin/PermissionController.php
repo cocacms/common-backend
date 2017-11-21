@@ -26,7 +26,7 @@ class PermissionController extends Controller
         $routes = Route::getRoutes()->getRoutes();
         $routeList = [];
         foreach ($routes as $route){
-            if(!$route->autoPermission && !is_null($route->permissionName)){
+            if(!is_null($route->permissionName)){
 
                 $uri = $route->uri();
                 $method = $route->methods()[0];

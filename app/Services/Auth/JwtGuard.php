@@ -5,6 +5,7 @@ use Illuminate\Auth\Events\Logout;
 use Illuminate\Auth\GuardHelpers;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Foundation\Testing\HttpException;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Support\Str;
@@ -46,6 +47,8 @@ class JwtGuard implements Guard
      */
     protected $events;
 
+    private $name;
+
     /**
      * Create a new authentication guard.
      *
@@ -53,8 +56,9 @@ class JwtGuard implements Guard
      * @param  \Illuminate\Http\Request  $request
      * @return void
      */
-    public function __construct(UserProvider $provider, Request $request)
+    public function __construct(UserProvider $provider, $name, Request $request)
     {
+        $this->name = $name;
         $this->request = $request;
         $this->provider = $provider;
         $this->inputKey = config('auth.jwt.inputKey','token');
@@ -233,13 +237,26 @@ class JwtGuard implements Guard
         );
 
         //expire 指定token的生命周期。单位秒 0 标识永久有效
-        if(config('auth.jwt.exp',0) != 0){
-            $payload['exp'] = time() + config('auth.jwt.exp',0);
+        $exp = json_decode( config('auth.jwt.exp','{"_":0}') , true);
+        if(isset($exp[$this->name])){
+            $exp = $exp[$this->name];
+        }else{
+            $exp = $exp['_'];
+        }
+        if($exp != 0){
+            $payload['exp'] = time() + $exp;
         }
 
         //not before。多少秒之后token才有效。单位秒
-        if(config('auth.jwt.nbf',0) != 0){
-            $payload['nbf'] = time() + config('auth.jwt.nbf',0);
+        $nbf = json_decode( config('auth.jwt.nbf','{"_":0}'), true);
+        if(isset($nbf[$this->name])){
+            $nbf = $nbf[$this->name];
+        }else{
+            $nbf = $nbf['_'];
+        }
+
+        if($nbf != 0){
+            $payload['nbf'] = time() + $nbf;
         }
         $sign_type = config('auth.jwt.type','RS256');
         if(stripos($sign_type,'RS') !== false){

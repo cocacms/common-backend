@@ -28,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Auth::extend('jwt',function ($app, $name, array $config){
-            return new JwtGuard(Auth::createUserProvider($config['provider']),$app['request']);
+            return new JwtGuard(Auth::createUserProvider($config['provider']),$name, $app['request']);
         });
     }
 }
