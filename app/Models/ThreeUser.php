@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Authenticatable as auth;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,9 +27,8 @@ class ThreeUser extends Model
 
     public function xcxUpdateInfo($user,$iv,$encryptedData)
     {
-        $xcx = App::make("wxxcx");
-        $xcx->setSessionKey($user->sessionkey);
-        $userinfo = $xcx->getUserInfo($encryptedData,$iv);
+        $miniProgram = EasyWeChat::miniProgram();
+        $userinfo = $miniProgram->encryptor->decryptData($user->sessionkey, $iv, $encryptedData);
 //        Log::info('user info update '.json_encode($userinfo));
         if(!isset($userinfo['nickName'])){
             throw new AuthenticationException();
