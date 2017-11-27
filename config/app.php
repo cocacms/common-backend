@@ -180,6 +180,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\BaumServiceProvider::class,
         \Yangyifan\Upload\UploadServiceProvider::class,
+        \App\Providers\AlipayProvider::class,
 
     ],
 
